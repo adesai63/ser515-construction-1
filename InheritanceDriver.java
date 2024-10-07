@@ -65,20 +65,35 @@ public class InheritanceDriver {
 	System.out.println("THE EMPLOYEES WITH INCREASED OPTIONS");
 	for (int i=0; i < list.length; i++) {
 	    // This loop should increase the options of employees that have options, and print only those employees out.
-	    list[i].increaseOptions(random.nextInt(100));
-	    System.out.println(list[i]);
+	    if(list[i] instanceof FullTimeEmployee){
+			FullTimeEmployee FTEmployee = (FullTimeEmployee) list[i];
+			FTEmployee.increaseOptions(random.nextInt(100));
+			System.out.println(FTEmployee);
+		}
+	    
 
 	}
 	System.out.println("THE EMPLOYEES WITH BONUSES");
 	for (int i=0; i < list.length; i++) {
+		if(list[i] instanceof PartTimeEmployee){
+			PartTimeEmployee PartTE = (PartTimeEmployee) list[i];
+			System.out.println(PartTE + " bonus: " + nf.format(PartTE.computeBonus()));
+		}
+		else if(list[i] instanceof FullTimeEmployee){
+			FullTimeEmployee FTEmployee = (FullTimeEmployee) list[i];
+			System.err.println(FTEmployee + " bonus: " + nf.format(FTEmployee.computeBonus()));
+		}
 	    // This loop should apply bonuses to employees that can get bonuses, and print only those employees out.
-	    System.out.println(list[i] + " bonus: " + nf.format(list[i].computeBonus()));
+	    
 	}
 	System.out.println("THE EMPLOYEES AFTER RAISES");
 	for (int i=0; i < list.length; i++) {
+		if(list[i] instanceof PartTimeEmployee){
+			PartTimeEmployee PartTE = (PartTimeEmployee) list[i];
+			PartTE.raise(random.nextDouble(9000.0) + 1000.0);
+			System.out.println(PartTE);
+		}
 	    // This loop should give raises to employees that can get raises, and print only those employees out.
-	    list[i].raise(random.nextDouble(9000.0) + 1000.0);
-	    System.out.println(list[i]);
 	}
 	System.out.println("FINAL STATE OF THE EMPLOYEES");
 	for (int i=0; i < list.length; i++) {

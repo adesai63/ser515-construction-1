@@ -81,7 +81,7 @@ public class InheritanceDriver {
 		}
 		else if(list[i] instanceof FullTimeEmployee){
 			FullTimeEmployee FTEmployee = (FullTimeEmployee) list[i];
-			System.err.println(FTEmployee + " bonus: " + nf.format(FTEmployee.computeBonus()));
+			System.out.println(FTEmployee + " bonus: " + nf.format(FTEmployee.computeBonus()));
 		}
 	    // This loop should apply bonuses to employees that can get bonuses, and print only those employees out.
 	    

@@ -1,12 +1,12 @@
 import java.text.NumberFormat;
 import java.util.*;
 
-class Employee{
-    protected String name;
-    protected int dept;
-    protected double salary;
+class EmployeeB {
+    public String name;
+    public int dept;
+    public double salary;
 
-    public Employee(String name, int dept, double salary){
+    public EmployeeB(String name, int dept, double salary){
         this.name = name;
         this.dept = dept;
         this.salary = salary;
@@ -24,20 +24,20 @@ class Employee{
     }
 }
 
-class PartTimeEmployee extends Employee{
-    public PartTimeEmployee(String name, int dept, double salary){
-        super(name,dept,salary);
+class PartTimeEmployeeB extends EmployeeB {
+    public PartTimeEmployeeB(String name, int dept, double salary){
+        super(name, dept, salary);
     }
     @Override
     public String toString(){
-        return "PartTime- "+ super.toString();
+        return "PartTime- " + super.toString();
     }
 }
 
-class FullTimeEmployee extends Employee{
+class FullTimeEmployeeB extends EmployeeB {
     private int numOfOptions;
-    public FullTimeEmployee(String name, int dept, double salary){
-        super(name,dept,salary);
+    public FullTimeEmployeeB(String name, int dept, double salary){
+        super(name, dept, salary);
         this.numOfOptions = 0;
     }
     public void increaseOptions(int number){
@@ -45,7 +45,7 @@ class FullTimeEmployee extends Employee{
     }
     @Override
     public double computeBonus(){
-        return 0.03 * salary +100 * numOfOptions;
+        return 0.03 * salary + 100 * numOfOptions;
     }
     @Override
     public String toString(){
@@ -53,42 +53,45 @@ class FullTimeEmployee extends Employee{
     }
 }
 
-public class InheritanceDriverB{
+public class InheritanceDriverB {
     public static void main(String[] args) {
         Random random = new Random();
-        Employee[] list = new Employee[5];
-        NumberFormat nf= NumberFormat.getCurrencyInstance();
+        EmployeeB[] list = new EmployeeB[5];
+        NumberFormat nf = NumberFormat.getCurrencyInstance();
 
-        list[0] = new PartTimeEmployee("PTE1", random.nextInt(3), random.nextDouble() * 50000);
-        list[1] = new FullTimeEmployee("FTE2", random.nextInt(3), random.nextDouble() * 100000);
-        list[2] = new FullTimeEmployee("FTE3", random.nextInt(3), random.nextDouble() * 100000);
-        list[3] = new PartTimeEmployee("PTE4", random.nextInt(3), random.nextDouble() * 50000);
-        list[4] = new FullTimeEmployee("FTE5", random.nextInt(3), random.nextDouble() * 100000);
+        list[0] = new PartTimeEmployeeB("PTE1", random.nextInt(3), random.nextDouble() * 50000);
+        list[1] = new FullTimeEmployeeB("FTE2", random.nextInt(3), random.nextDouble() * 100000);
+        list[2] = new FullTimeEmployeeB("FTE3", random.nextInt(3), random.nextDouble() * 100000);
+        list[3] = new PartTimeEmployeeB("PTE4", random.nextInt(3), random.nextDouble() * 50000);
+        list[4] = new FullTimeEmployeeB("FTE5", random.nextInt(3), random.nextDouble() * 100000);
 
         System.out.println("THE EMPLOYEES");
-        for(Employee emp: list){
+        for (EmployeeB emp : list) {
             System.out.println(emp);
         }
 
-        System.out.println("THE EMPLOTEES WITH INCREASED OPTIONS");
-        for(Employee emp: list){
-            if(emp instanceof FullTimeEmployee){
-                FullTimeEmployee fte = (FullTimeEmployee) emp;
+        System.out.println("THE EMPLOYEES WITH INCREASED OPTIONS");
+        for (EmployeeB emp : list) {
+            if (emp instanceof FullTimeEmployeeB) {
+                FullTimeEmployeeB fte = (FullTimeEmployeeB) emp;
                 fte.increaseOptions(random.nextInt(100));
                 System.out.println(fte);
             }
         }
+
         System.out.println("THE EMPLOYEES WITH BONUSES");
-        for(Employee emp: list){
+        for (EmployeeB emp : list) {
             System.out.println(emp + " bonus: " + nf.format(emp.computeBonus()));
         }
+
         System.out.println("THE EMPLOYEES AFTER RAISES");
-        for (Employee emp : list) {
+        for (EmployeeB emp : list) {
             emp.raise(random.nextDouble(9000.0) + 1000.0);
             System.out.println(emp);
         }
+
         System.out.println("FINAL STATE OF THE EMPLOYEES");
-        for (Employee emp : list) {
+        for (EmployeeB emp : list) {
             System.out.println(emp);
         }
     }
